@@ -112,3 +112,31 @@ func (mysql *MySQL) GetById(id int) (domain.Car, error) {
 
 	return car, fmt.Errorf("No se encontró ningún carro con el ID proporcionado")
 }
+
+//aquí van dos updates de los rentCar y returnCar de los useCase
+
+func (mysql *MySQL) RentCar(id_car int) (uint, error) {
+	query := "UPDATE cars SET available = 0 WHERE id = ?"
+	res, err := mysql.conn.ExecutePreparedQuery(query, id_car)
+
+	if err != nil {
+		fmt.Println("Error al ejecutar la consulta:", err)
+		return 0, err
+	}
+	rows, _ := res.RowsAffected()
+	
+	return uint(rows), nil
+}
+
+func (mysql *MySQL) ReturnCar(id_car int) (uint, error) {
+	query := "UPDATE cars SET available = 1 WHERE id = ?"
+	res, err := mysql.conn.ExecutePreparedQuery(query, id_car)
+	if err != nil {
+		fmt.Println("Error al ejecutar la consulta:", err)
+		return 0, err
+	}
+	
+	rows, _ := res.RowsAffected()
+	
+	return uint(rows), nil
+}

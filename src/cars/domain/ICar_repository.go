@@ -6,4 +6,6 @@ type ICar interface {
 	GetAll() ([]Car) //tenemos nuestros métodos los cuales los usuarios hacen la acción con nuestra base de datos
 	Delete(id int) (uint, error)
 	Update(id int, car Car) (uint, error)
+	RentCar(id_car int) (uint, error)
+	ReturnCar(id_car int) (uint, error) 
 }
