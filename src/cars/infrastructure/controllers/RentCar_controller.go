@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"segunda-API-w-rabbit/src/cars/application/services"
 	application "segunda-API-w-rabbit/src/cars/application/useCases"
@@ -43,6 +44,8 @@ func (rc *RentCarController) Run (c *gin.Context){
 		return
 	}
 
+	fmt.Print(rent)
+
 	rowsAffected, _ := rc.app.Run(int(rent.Id_Car))
 
 	if rowsAffected == 0 {
@@ -52,7 +55,7 @@ func (rc *RentCarController) Run (c *gin.Context){
 		return
 	}
 
-	rc.service.Run(int(rent.Id_Customer), rent.Return_date_rent)
+	// rc.service.Run(int(rent.Id_Customer), rent.Return_date_rent)
 	c.JSON(http.StatusOK, gin.H {
 		"status": "está bien la notificación de la renta",
 	})

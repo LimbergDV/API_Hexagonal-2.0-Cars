@@ -14,7 +14,7 @@ func Routes (r *gin.Engine) {
 		carsRoutes.GET("/", controllers.NewGetAllCarsController().Run)
 		carsRoutes.PUT("/:id", controllers.NewUpdateCarByIdController().Run)
 		carsRoutes.DELETE("/:id", controllers.NewDeleteCarByIdController().Run)
-		carsRoutes.PUT("/rent/:id", controllers.NewReturnCarController().Run) 
-		carsRoutes.PUT("/return/:id", controllers.NewReturnCarController().Run)
+		carsRoutes.PUT("/rent/", controllers.NewRentCarController().Run) 
+		carsRoutes.PUT("/return/", controllers.NewReturnCarController().Run)
 	}
 }

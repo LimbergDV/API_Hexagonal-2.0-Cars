@@ -1,11 +1,13 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"segunda-API-w-rabbit/src/cars/application/services"
 	application "segunda-API-w-rabbit/src/cars/application/useCases"
 	"segunda-API-w-rabbit/src/cars/domain"
 	"segunda-API-w-rabbit/src/cars/infrastructure"
+
 	"segunda-API-w-rabbit/src/cars/infrastructure/routes/validators"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +35,8 @@ func (rc_c *ReturnCarController) Run(c *gin.Context) {
 		})
 		return
 	}
+
+	fmt.Print(rent)
 	
 	if err := validators.CheckRent(rent); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -51,7 +55,7 @@ func (rc_c *ReturnCarController) Run(c *gin.Context) {
 	}
 
 	// Notificar de devuelto
-	rc_c.service.Run(int(rent.Id_Customer))
+	// rc_c.service.Run(int(rent.Id_Customer))
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": true,

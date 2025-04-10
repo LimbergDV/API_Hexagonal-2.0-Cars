@@ -116,6 +116,7 @@ func (mysql *MySQL) GetById(id int) (domain.Car, error) {
 //aquí van dos updates de los rentCar y returnCar de los useCase
 
 func (mysql *MySQL) RentCar(id_car int) (uint, error) {
+	fmt.Print(id_car)
 	query := "UPDATE cars SET available = 0 WHERE id = ?"
 	res, err := mysql.conn.ExecutePreparedQuery(query, id_car)
 
