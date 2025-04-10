@@ -9,7 +9,7 @@ import (
 )
 
 func RequestCarsFetchAPI(rent entities.Rent, method string) {
-	URL := "http://localhost:8084/cars/" + method 
+	URL := "http://localhost:8083/cars/" + method 
 	jsonBody, _ := json.Marshal(rent)
 
 	req, err := http.NewRequest(http.MethodPut, URL, bytes.NewBuffer(jsonBody))
