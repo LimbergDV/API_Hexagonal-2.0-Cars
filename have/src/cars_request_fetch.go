@@ -28,6 +28,6 @@ func RequestCarsFetchAPI(rent entities.Rent, method string) {
 	if resp.StatusCode != http.StatusOK {
 		log.Printf("La petición PATCH devolvió el estado: %d", resp.StatusCode)
 	} else {
-		log.Println("Libro actualizado correctamente mediante PATCH")
+		log.Println("Carro actualizado correctamente mediante PATCH")
 	}
 }

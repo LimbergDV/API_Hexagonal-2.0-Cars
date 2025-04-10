@@ -29,21 +29,21 @@ func NewRabbitMQ() *RabbitMQ{
 	return &RabbitMQ{conn: conn, ch: ch}  
 }
 
-func (r *RabbitMQ) NotifyOfLend(id_reader int, return_date string) {
+func (r *RabbitMQ) NotifyOfRent(id_customer int, return_date string) {
 	var notify Notify
-	notify.Id_Customer = id_reader
+	notify.Id_Customer = id_customer
 	notify.Return_date = return_date
 	payload, err := json.Marshal(notify)
-	failOnError(err, "Error al serializar Loan a JSON")
+	failOnError(err, "Error al serializar Rent a JSON")
 	r.prepareToMessage(payload)
 }
 
-func (r *RabbitMQ) NotifyOfReturn(id_reader int) {
+func (r *RabbitMQ) NotifyOfReturn(id_customer int) {
 	var notify Notify
-	notify.Id_Customer = id_reader
+	notify.Id_Customer = id_customer
 	notify.Return_date = "null"
 	payload, err := json.Marshal(notify)
-	failOnError(err, "Error al serializar Loan a JSON")
+	failOnError(err, "Error al serializar Rent a JSON")
 	r.prepareToMessage(payload)
 }
 

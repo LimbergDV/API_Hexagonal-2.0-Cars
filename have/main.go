@@ -26,10 +26,10 @@ func main() {
             log.Printf("Error al decodificar el mensaje: %s", err)
             continue
         }
-        log.Printf(" [x] Prestamo recibido: id_customer=%d, id_car=%d, return_date=%s", rent.Id_Customer, rent.Id_Car, rent.Return_date_rent)
+        log.Printf(" [x] Renta recibido: id_customer=%d, id_car=%d, return_date=%s", rent.Id_Customer, rent.Id_Car, rent.Return_date_rent)
         
         if rent.Return_date_rent != "0000-00-00" {
-          src.RequestCarsFetchAPI(rent, "lend")
+          src.RequestCarsFetchAPI(rent, "rent")
         } else {
 		  src.RequestCarsFetchAPI(rent, "return")
         } 
