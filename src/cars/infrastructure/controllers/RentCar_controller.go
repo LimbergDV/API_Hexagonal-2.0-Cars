@@ -55,7 +55,7 @@ func (rc *RentCarController) Run (c *gin.Context){
 		return
 	}
 
-	// rc.service.Run(int(rent.Id_Customer), rent.Return_date_rent)
+	rc.service.Run()
 	c.JSON(http.StatusOK, gin.H {
 		"status": "está bien la notificación de la renta",
 	})

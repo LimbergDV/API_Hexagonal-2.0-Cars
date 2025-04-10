@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"segunda-API-w-rabbit/src/cars/domain"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -29,19 +30,17 @@ func NewRabbitMQ() *RabbitMQ{
 	return &RabbitMQ{conn: conn, ch: ch}  
 }
 
-func (r *RabbitMQ) NotifyOfRent(id_customer int, return_date string) {
-	var notify Notify
-	notify.Id_Customer = id_customer
-	notify.Return_date = return_date
+func (r *RabbitMQ) NotifyOfRent() {
+	var notify domain.Message
+	notify.Action = "rent"
 	payload, err := json.Marshal(notify)
 	failOnError(err, "Error al serializar Rent a JSON")
 	r.prepareToMessage(payload)
 }
 
-func (r *RabbitMQ) NotifyOfReturn(id_customer int) {
-	var notify Notify
-	notify.Id_Customer = id_customer
-	notify.Return_date = "null"
+func (r *RabbitMQ) NotifyOfReturn() {
+	var notify domain.Message
+	notify.Action = "return"
 	payload, err := json.Marshal(notify)
 	failOnError(err, "Error al serializar Rent a JSON")
 	r.prepareToMessage(payload)
@@ -50,8 +49,8 @@ func (r *RabbitMQ) NotifyOfReturn(id_customer int) {
 func (r *RabbitMQ) prepareToMessage(body []byte) {
 	// Declaración del exchange (intercambiador):
 	r.ch.ExchangeDeclare(
-		"exchange_notifications",   // name
-		"direct", // type
+		"exchanges_cars",   // name
+		"topic", // type
 		true,     // durable
 		false,    // auto-deleted
 		false,    // internal
@@ -63,8 +62,8 @@ func (r *RabbitMQ) prepareToMessage(body []byte) {
 	defer cancel()
 	  
 	r.ch.PublishWithContext(ctx,
-		"exchange_notifications",     // exchange
-		"notificacion", // routing key
+		"exchanges_cars",     // exchange
+		"cars", // routing key
 		false,  // mandatory
 		false,  // immediate
 		amqp.Publishing {

@@ -23,8 +23,8 @@ func NewRabbitMQ() *RabbitMQ {
 func (r *RabbitMQ) GetMessages() <-chan amqp.Delivery {
 	// Declaración al exchange (intercambiador) al cual éste consumidor se suscribira mediante una cola
 	err := r.ch.ExchangeDeclare(
-		"exchange_rents",   // name
-		"direct", // type
+		"exchanges_cars",   // name
+		"topic", // type
 		true,     // durable
 		false,    // auto-deleted
 		false,    // internal
@@ -49,7 +49,7 @@ func (r *RabbitMQ) GetMessages() <-chan amqp.Delivery {
 	err = r.ch.QueueBind(
 		q.Name, // queue name
 		"rents",     // routing key
-		"exchange_rents", // exchange
+		"exchanges_cars", // exchange
 		false,
 		nil,
 	)

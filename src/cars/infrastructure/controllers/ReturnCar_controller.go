@@ -55,7 +55,7 @@ func (rc_c *ReturnCarController) Run(c *gin.Context) {
 	}
 
 	// Notificar de devuelto
-	// rc_c.service.Run(int(rent.Id_Customer))
+	rc_c.service.Run()
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": true,

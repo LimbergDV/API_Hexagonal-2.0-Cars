@@ -9,10 +9,10 @@ import (
 )
 
 func RequestCarsFetchAPI(rent entities.Rent, method string) {
-	URL := "http://localhost:8080/cars/" + method 
+	URL := "http://localhost:8084/cars/" + method 
 	jsonBody, _ := json.Marshal(rent)
 
-	req, err := http.NewRequest(http.MethodPatch, URL, bytes.NewBuffer(jsonBody))
+	req, err := http.NewRequest(http.MethodPut, URL, bytes.NewBuffer(jsonBody))
 	if err != nil {
 		log.Fatalf("Error creando la petición PATCH: %v", err)
 	}

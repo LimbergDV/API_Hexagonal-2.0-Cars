@@ -12,6 +12,6 @@ func NewNotifyOfRent(rmq repository.IRabbit) *NotifyOfRentEvent {
 	return &NotifyOfRentEvent{rmq: rmq}
 }
 
-func (r *NotifyOfRentEvent) Run(id_customer int, return_date string) {
-	r.rmq.NotifyOfRent(id_customer, return_date)
+func (r *NotifyOfRentEvent) Run() {
+	r.rmq.NotifyOfRent()
 }

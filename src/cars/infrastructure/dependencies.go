@@ -7,8 +7,9 @@ var (
 	rabbitmq *adapters.RabbitMQ
 )
 
-func GoMySQL() {
+func GoDependeces() {
 	mysql = NewMySQL()
+	rabbitmq = adapters.NewRabbitMQ()
 }
 
 func GetMySQL() *MySQL {

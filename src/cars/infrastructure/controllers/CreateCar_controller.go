@@ -41,7 +41,7 @@ func (cc_c *CreateCarController) Run (c *gin.Context){
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 	} else {
 		c.JSON(http.StatusCreated, gin.H {"mensaje": "Carro creado"})
-		c.JSON(http.StatusOK, cars)
+	
 
 	}
 }

@@ -29,9 +29,9 @@ func main() {
         log.Printf(" [x] Renta recibido: id_customer=%d, id_car=%d, return_date=%s", rent.Id_Customer, rent.Id_Car, rent.Return_date_rent)
         
         if rent.Return_date_rent != "0000-00-00" {
-          src.RequestCarsFetchAPI(rent, "rent")
+          src.RequestCarsFetchAPI(rent, "rent/")
         } else {
-		  src.RequestCarsFetchAPI(rent, "return")
+		  src.RequestCarsFetchAPI(rent, "return/")
         } 
     }
 }()
